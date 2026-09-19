@@ -24,7 +24,7 @@
 
 #let heading-side(title) = {
   block(above: 1.3em, below: 0.5em)[
-    #text(fill: white, weight: "bold", size: 10.5pt, tracking: 1pt)[#upper(title)]
+    #text(fill: white, weight: "bold", size: 9pt, tracking: 1pt)[#upper(title)]
     #v(-0.5em)
     #line(length: 100%, stroke: 0.6pt + rgb("#334155"))
   ]
@@ -49,20 +49,15 @@
   ]
 }
 
-#let level-bar(label, sublabel, fraction) = {
+#let level-bar(label, level) = {
   block(above: 0.5em, below: 0.5em)[
     #text(size: 9pt, weight: "medium", fill: sidebar-fg)[#label]
-    #if sublabel != none [
-      #text(size: 8pt, fill: sidebar-muted)[ · #sublabel]
-    ]
-    #v(0.2em)
-    #box(width: 100%, height: 3.2pt, fill: rgb("#334155"), radius: 2pt)[
-      #box(width: fraction * 100%, height: 100%, fill: accent.lighten(10%), radius: 2pt)
-    ]
+    #h(1fr)
+    #text(size: 8.5pt, fill: accent.lighten(10%), weight: "bold")[#level]
   ]
 }
 
-#let project-card(name, description, tech) = {
+#let project-card(name, description, tech, url: none) = {
   block(
     width: 100%,
     height: 3.6cm,
@@ -72,6 +67,9 @@
     stroke: (top: 2.2pt + accent),
   )[
     #text(weight: "bold", size: 9.4pt, fill: dark)[#name]
+    #if url != none [
+      #text(size: 7pt, fill: accent, weight: "medium")[ · #link(url)[GitHub↗]]
+    ]
     #v(0.16em)
     #text(size: 8pt, fill: gray)[#description]
     #v(1fr)
@@ -82,8 +80,9 @@
 #let contact-line(label, content) = {
   block(above: 0.4em, below: 0.4em)[
     #text(size: 7.3pt, fill: accent.lighten(25%), weight: "bold", tracking: 0.5pt)[#upper(label)]
-    #v(-0.35em)
+    #v(-0.7em)
     #text(size: 8.8pt, fill: sidebar-fg)[#content]
+    #v(.5em)
   ]
 }
 
@@ -120,34 +119,32 @@
     #contact-line("Telefon", [+47 983 22 914])
     #contact-line("Adresse", [Skogveien 24B, 1433 Ås])
     #contact-line("Født", [03.07.2004])
-    #contact-line("GitHub", [#link("https://github.com/MrProgrammerMan")[MrProgrammerMan]])
+    #contact-line("LinkedIn", [#link("https://www.linkedin.com/in/jonas-baugerud/")[Se profil ↗]])
+    #contact-line("GitHub", [#link("https://github.com/MrProgrammerMan")[Se profil ↗]])
 
     #heading-side[Språk]
-    #level-bar("Norsk (bokmål)", "morsmål", 1.0)
-    #level-bar("Engelsk", "flytende", 0.95)
-    #level-bar("Rust", "raskt + trygt", 0.80)
-    #level-bar("Haskell", "funksjonelt", 0.55)
-    #level-bar("Nix", "infra", 0.65)
+    #level-bar("Norsk (bokmål)", "C2")
+    #level-bar("Engelsk", "C2")
 
-    #heading-side[Teknologi]
+    #heading-side[Kompetanse]
     #block(above: 0.4em)[
-      #text(size: 8pt, fill: accent.lighten(25%), weight: "bold", tracking: 0.5pt)[GOD KJENNSKAP] \
+      #text(size: 8pt, fill: accent.lighten(25%), weight: "bold", tracking: 0.5pt)[Programmeringsspråk] \
       #text(size: 8.6pt, fill: sidebar-fg)[
-        Rust · Nix · Bash · PostgreSQL · Python · Java · HTML/CSS · JavaScript
+        Rust · Nix · Haskell · Bash · SQL · Python · Java · JavaScript · HTML/CSS · Scheme(Lisp)
       ]
     ]
     #v(0.6em)
     #block[
-      #text(size: 8pt, fill: accent.lighten(25%), weight: "bold", tracking: 0.5pt)[LÆRER FOR TIDEN] \
+      #text(size: 8pt, fill: accent.lighten(25%), weight: "bold", tracking: 0.5pt)[Arkitekturer] \
       #text(size: 8.6pt, fill: sidebar-fg)[
-        Haskell · Scheme (Lisp) · WASM · async Rust · Vim · Event modeling · Event sourcing
+        Event sourcing · CRUD
       ]
     ]
     #v(0.6em)
     #block[
-      #text(size: 8pt, fill: accent.lighten(25%), weight: "bold", tracking: 0.5pt)[VERKTØY] \
+      #text(size: 8pt, fill: accent.lighten(25%), weight: "bold", tracking: 0.5pt)[Verktøy] \
       #text(size: 8.6pt, fill: sidebar-fg)[
-        Docker · Figma · GitHub Actions · NixOS · Nginx · Redis · Caddy
+        Nix/NixOS · Docker · Figma · GitHub Actions · Event modeling · Nginx/Caddy · Redis · Vim
       ]
     ]
 
@@ -164,14 +161,45 @@
     inset: (x: 1.4cm, y: 1.5cm),
   )[
 
-    == #heading-main[Om meg]
+    == #heading-main[Jobberfaring]
     #v(-0.3em)
-    #text(size: 9.6pt, fill: dark)[
-      Jeg er dataingeniørstudent ved OsloMet med stor interesse for programmering, problemløsning og læring. \ #v(1pt)
-      Personlig foretrekker jeg å jobbe med språk med gode typesystemer, ytelse og garantier om hvordan koden vil oppføre seg. Som all-around-språk bruker jeg mest Rust. Jeg lærer også Haskell, et av de eldre og mest robuste funksjonelle programmeringsspråkene. \ #v(1pt)
-      Arkitekturmessig er jeg veldig fascinert av event sourcing og event modeling. \ #v(1pt)
-      I tillegg til språkene jeg bruker til utvikling, bruker jeg Nix og NixOS til å konfigurere alle prosjektene og maskinene mine. Dette inkluderer utviklermiljøer og servere.
-    ]
+    #entry(
+      "Aug 2026 - Des 2026",
+      "OsloMet",
+      "Studentassistent — DATS2300 Algoritmer og Datastrukturer",
+    )
+    #entry(
+      "Jan 2026 - Jul 2026",
+      "OsloMet",
+      "Studentassistent — DATA1700 Webprogrammering",
+    )
+    #v(1em)
+
+    #heading-main[Utdanning]
+
+    #entry(
+      "Aug 2024 - nå",
+      "OsloMet — Storbyuniversitetet",
+      "Bachelor i dataingeniør",
+    )
+    #entry(
+      "Pågående",
+      "Universitetet i Oslo",
+      "Enkeltemne(UiO) - IN2040 Funksjonell programmering",
+    )
+    #entry(
+      "Aug 2023 - Jun 2024",
+      "NTNU",
+      "Bachelor i systemutvikling, dataingeniør",
+    )
+
+    #heading-main[Verv]
+
+    #entry(
+      "Sep 2025 - 2026",
+      "Ditio — linjeforening for IT-studenter, OsloMet",
+      "Bedriftskontakt og arrangementsansvarlig",
+    )
     #v(1em)
 
     #heading-main[Utvalgte prosjekter]
@@ -183,41 +211,25 @@
         "Metronomicon",
         "Infoside for studenter ved OsloMet med crowdsourcing.",
         "Rust · React · Docker · Nix · Event sourcing",
+        url: "https://github.com/The-Quantum-6/Metronomicon",
       ),
       project-card(
         "Porteføljeside",
         "Personlig porteføljeside skrevet fullstack i Rust.",
         "Rust · Nix · OAuth2 · JWT",
+        url: "https://github.com/MPM-Labs/portfolio",
       ),
       project-card(
         "NixOS Deployment Template",
         "Eget deployment-verktøy basert på nixos-anywhere, integrert med GitHub Actions.",
         "Nix · SSH · GitHub Actions",
+        url: "git@github.com:MPM-Labs/nixos-deployment-template.git",
       ),
     )
     #v(1em)
 
-    #heading-main[Verv]
+    #heading-main[2020-2025]
 
-    #entry(
-      "Pågående",
-      "Ditio — linjeforening for IT-studenter, OsloMet",
-      "Bedriftskontakt og arrangementsansvarlig",
-    )
-    #v(1em)
-
-    #heading-main[Jobberfaring]
-
-    #entry(
-      "Aug 2026 - Des 2026",
-      "OsloMet",
-      "Studentassistent — DATS2300 Algoritmer og Datastrukturer",
-    )
-    #entry(
-      "Jan 2026 - Jul 2026",
-      "OsloMet",
-      "Studentassistent — DATA1700 Webprogrammering",
-    )
     #entry(
       "Nov 2024 - Jul 2025",
       "Holdbart AS",
@@ -244,23 +256,5 @@
       "Butikkmedarbeider, deltid",
     )
     #v(1em)
-
-    #heading-main[Utdanning]
-
-    #entry(
-      "Aug 2024 - nå",
-      "OsloMet — Storbyuniversitetet",
-      "Bachelor i dataingeniør",
-    )
-    #entry(
-      "Pågående",
-      "Universitetet i Oslo",
-      "Enkeltemne(UiO) - IN2040 Funksjonell programmering",
-    )
-    #entry(
-      "Aug 2023 - Jun 2024",
-      "NTNU",
-      "Bachelor i systemutvikling, dataingeniør",
-    )
   ]
 )
